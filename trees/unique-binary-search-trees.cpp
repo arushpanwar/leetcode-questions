@@ -13,3 +13,21 @@ public:
         return total;
     }
 };
+
+
+//Memoization code 100% faster
+int totalBst(int n,vector<int>& dp){
+        if(n==0||n==1)return dp[n]=1;
+        if(n==2)return dp[n]=2;
+        if(dp[n]!=0)return dp[n];
+        int total=0;
+        for(int i=0;i<n;i++){
+            total+=totalBst(i,dp)*totalBst(n-i-1,dp);
+        }
+        return dp[n]=total;
+    }
+    
+    int numTrees(int n) {
+        vector<int> dp(n+1,0);
+        return totalBst(n,dp);
+    }
