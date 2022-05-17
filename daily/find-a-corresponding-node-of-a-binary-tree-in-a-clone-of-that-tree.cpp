@@ -25,4 +25,12 @@ public:
         int value=target->val;
         return getTarget(cloned,value);
     }
+    
+    //smaller dfs code
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
+        if(!original||original==target)return cloned;
+        TreeNode* ans=getTargetCopy(original->left,cloned->left,target);
+        if(ans)return ans;
+        return getTargetCopy(original->right,cloned->right,target);
+    }
 };
